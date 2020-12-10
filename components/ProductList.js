@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { Card, ResourceList, Stack, TextStyle, Thumbnail } from '@shopify/polaris';
+import { Card, ResourceList, Stack, TextStyle, Thumbnail, Badge } from '@shopify/polaris';
 import store from 'store-js';
 
 const GET_PRODUCTS_BY_ID = gql`
@@ -74,13 +74,24 @@ function ProductList() {
                 accessibilityLabel={`View details for ${item.title}`}
               >
               <Stack>
-                  <Stack.Item fill>
+                  <Stack.Item>
                     <h3>
                       <TextStyle variation='strong'>
                         {item.title}
                       </TextStyle>
                     </h3>
                   </Stack.Item>
+                  <Stack.Item>
+                  {
+                  item.metafield === null ?
+                  <p key={item.id}>No Order-By Date</p>
+                  :
+                  <Badge statu="info">
+                    {item.metafield.value}
+                  </Badge>
+                  }
+                  </Stack.Item>
+
                   <Stack.Item>
                     <p>${price}</p>
                   </Stack.Item>
