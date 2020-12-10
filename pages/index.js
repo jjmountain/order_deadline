@@ -2,6 +2,7 @@ import { Page, Layout, EmptyState  } from "@shopify/polaris";
 import { ResourcePicker } from '@shopify/app-bridge-react'
 import React, { useState } from 'react';
 import store from 'store-js';
+import ProductList from '../components/ProductList';
 
 function Index() {
   const [modal, setModal] = useState({ open: false })
@@ -29,6 +30,7 @@ function Index() {
           onSelection={(resources) => handleSelection(resources)}
         />
         <Layout>
+          { emptyState ? 
           <EmptyState
             heading="Manage your inventory transfers"
             action={{
@@ -39,6 +41,9 @@ function Index() {
           >
             <p>Select Products</p>
           </EmptyState>
+          :
+          <ProductList />
+          }
         </Layout>
 
       </Page>
